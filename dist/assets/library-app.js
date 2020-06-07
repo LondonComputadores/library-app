@@ -15,18 +15,6 @@
     }
   });
 });
-;define("library-app/adapters/application", ["exports", "emberfire/adapters/firebase"], function (_exports, _firebase) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-
-  var _default = _firebase.default.extend({});
-
-  _exports.default = _default;
-});
 ;define("library-app/app", ["exports", "ember-resolver", "ember-load-initializers", "library-app/config/environment"], function (_exports, _emberResolver, _emberLoadInitializers, _environment) {
   "use strict";
 
@@ -893,6 +881,7 @@
   });
   _exports.default = void 0;
 
+  //export default class ContactController extends Controller({
   var _default = Ember.Controller.extend({
     headerMessage: 'Contact Us:',
     responseMessage: '',
@@ -900,10 +889,8 @@
     message: '',
     isValid: Ember.computed.match('emailAddress', /^.+@.+\..+$/),
     isLongEnough: Ember.computed.gte('message.length', 5),
-    isDisabled: Ember.computed.not('emailAddress', 'message'),
-    isBothTrue: Ember.computed.and('emailAddress', 'message'),
-    // isDisabled: not('isValid', 'isLongEnough'),  
-    // isBothTrue: and('isValid', 'isLongEnough'),    
+    isDisabled: Ember.computed.not('isValid', 'isLongEnough'),
+    isBothTrue: Ember.computed.and('isValid', 'isLongEnough'),
     actions: {
       sendMessage() {
         alert(`${this.get('emailAddress', 'message')}`);
@@ -933,12 +920,7 @@
     isDisabled: Ember.computed.not('isValid'),
     actions: {
       saveInvitation() {
-        const email = this.get('emailAddress');
-        const newInvitation = this.store.createRecord('invitation', {
-          email: email
-        });
-        newInvitation.save(); //alert(`Saving of the following email address is in progress: ${this.get('emailAddress')}`);
-
+        alert(`Saving of the following email address is in progress: ${this.get('emailAddress')}`);
         this.set('responseMessage', `Thank you! We've just saved your email address: ${this.get('emailAddress')}`);
         this.set('emailAddress', '');
       }
@@ -1221,16 +1203,6 @@
   };
   _exports.default = _default;
 });
-;define("library-app/initializers/emberfire", ["exports", "emberfire/initializers/emberfire"], function (_exports, _emberfire) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-  var _default = _emberfire.default;
-  _exports.default = _default;
-});
 ;define("library-app/initializers/export-application-global", ["exports", "library-app/config/environment"], function (_exports, _environment) {
   "use strict";
 
@@ -1317,24 +1289,6 @@
     name: 'ember-data',
     initialize: _initializeStoreService.default
   };
-  _exports.default = _default;
-});
-;define("library-app/models/invitation", ["exports", "ember-data"], function (_exports, _emberData) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-
-  // import Model, { attr } from '@ember-data/model';
-  // export default class InvitationModel extends Model {
-  //   @attr('string') email;
-  // }
-  var _default = _emberData.default.Model.extend({
-    email: _emberData.default.attr('string')
-  });
-
   _exports.default = _default;
 });
 ;define("library-app/modifiers/focus-trap", ["exports", "ember-focus-trap/modifiers/focus-trap"], function (_exports, _focusTrap) {
@@ -1453,26 +1407,6 @@
     }
   });
 });
-;define("library-app/services/firebase-app", ["exports", "emberfire/services/firebase-app"], function (_exports, _firebaseApp) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-  var _default = _firebaseApp.default;
-  _exports.default = _default;
-});
-;define("library-app/services/firebase", ["exports", "emberfire/services/firebase"], function (_exports, _firebase) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-  var _default = _firebase.default;
-  _exports.default = _default;
-});
 ;define("library-app/services/store", ["exports", "ember-data/store"], function (_exports, _store) {
   "use strict";
 
@@ -1557,8 +1491,8 @@
   _exports.default = void 0;
 
   var _default = Ember.HTMLBars.template({
-    "id": "/uNhBbiv",
-    "block": "{\"symbols\":[],\"statements\":[[7,\"div\",true],[10,\"class\",\"jumbotron text-center\"],[8],[0,\"  \\n  \\n  \"],[7,\"h1\",true],[8],[1,[28,\"Contact\",[[24,[\"Us\"]]],null],false],[9],[0,\"\\n\\n  \"],[7,\"br\",true],[8],[9],[7,\"br\",true],[8],[9],[0,\"\\n\\n  \"],[7,\"div\",true],[10,\"class\",\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-md-5 col-md-offset-2\"],[8],[0,\"\\n    \"],[1,[28,\"input\",null,[[\"type\",\"value\",\"class\",\"placeholder\",\"autofocus\"],[\"email\",[24,[\"emailAddress\"]],\"form-control\",\"Please type your e-mail address.\",\"autofocus\"]]],false],[0,\"\\n  \"],[9],[0,\"\\n  \"],[7,\"div\",true],[10,\"class\",\"col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3\"],[8],[0,\"\\n    \"],[1,[28,\"textarea\",null,[[\"class\",\"placeholder\",\"rows\",\"value\"],[\"form-control\",\"Your message. (At least 5 characters.)\",\"5\",[24,[\"message\"]]]]],false],[0,\"\\n  \"],[9],[0,\"\\n  \"],[7,\"div\",true],[10,\"class\",\"col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3\"],[8],[0,\"\\n    \"],[7,\"button\",false],[12,\"class\",\"btn btn-primary btn-lg btn-block\"],[12,\"disabled\",[22,\"isDisabled\"]],[3,\"action\",[[23,0,[]],\"saveMessage\"]],[8],[0,\"Send Message\"],[9],[0,\"\\n  \"],[9],[0,\"\\n\\n\"],[4,\"if\",[[24,[\"responseMessage\"]]],null,{\"statements\":[[0,\"    \"],[7,\"div\",true],[10,\"class\",\"alert alert-success\"],[8],[1,[22,\"responseMessage\"],false],[9],[0,\"\\n\"]],\"parameters\":[]},null],[0,\"\\n  \"],[7,\"br\",true],[8],[9],[7,\"br\",true],[8],[9],[0,\"\\n\\n\"],[9]],\"hasEval\":false}",
+    "id": "WkM54CdA",
+    "block": "{\"symbols\":[],\"statements\":[[7,\"div\",true],[10,\"class\",\"jumbotron text-center\"],[8],[0,\"\\n\\n  \"],[7,\"h1\",true],[8],[1,[28,\"Contact\",[[24,[\"Us:\"]]],null],false],[9],[0,\"\\n\\n  \"],[7,\"div\",true],[10,\"class\",\"form-horizontal form-group form-group-lg row\"],[8],[0,\"\\n     \"],[7,\"div\",true],[10,\"class\",\"col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-1 col-md-5 col-md-offset-2\"],[8],[0,\"\\n       \"],[1,[28,\"input\",null,[[\"type\",\"value\",\"class\",\"placeholder\",\"autofocus\"],[\"email\",[24,[\"emailAddress\"]],\"form-control\",\"Please type your e-mail address.\",\"autofocus\"]]],false],[0,\"\\n     \"],[9],[0,\"\\n    \"],[7,\"div\",true],[10,\"class\",\"col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3\"],[8],[0,\"\\n       \"],[7,\"button\",false],[12,\"class\",\"btn btn-primary btn-lg btn-block\"],[12,\"disabled\",[22,\"isDisabled\"]],[3,\"action\",[[23,0,[]],\"saveInvitation\"]],[8],[0,\"Request invitation\"],[9],[0,\"\\n     \"],[9],[0,\"\\n    \"],[9],[0,\"\\n    \"],[7,\"div\",true],[10,\"class\",\"col-xs-10 col-xs-offset-1 col-sm-offset-0 col-sm-4 col-md-3\"],[8],[0,\"\\n      \"],[7,\"button\",false],[12,\"class\",\"btn btn-primary btn-lg btn-block\"],[12,\"disabled\",[22,\"isDisabled\"]],[3,\"action\",[[23,0,[]],\"saveMessage\"]],[8],[0,\"Send Message\"],[9],[0,\"\\n    \"],[9],[0,\"\\n  \"],[9],[0,\"\\n\\n\"],[4,\"if\",[[24,[\"responseMessage\"]]],null,{\"statements\":[[0,\"     \"],[7,\"div\",true],[10,\"class\",\"alert alert-success\"],[8],[1,[22,\"responseMessage\"],false],[9],[0,\"\\n\"]],\"parameters\":[]},null]],\"hasEval\":false}",
     "meta": {
       "moduleName": "library-app/templates/contact.hbs"
     }
@@ -1582,16 +1516,6 @@
     }
   });
 
-  _exports.default = _default;
-});
-;define("library-app/torii-providers/firebase", ["exports", "emberfire/torii-providers/firebase"], function (_exports, _firebase) {
-  "use strict";
-
-  Object.defineProperty(_exports, "__esModule", {
-    value: true
-  });
-  _exports.default = void 0;
-  var _default = _firebase.default;
   _exports.default = _default;
 });
 ;define("library-app/transforms/boolean", ["exports", "@ember-data/serializer/-private"], function (_exports, _private) {
@@ -1669,7 +1593,7 @@ catch(err) {
 
 ;
           if (!runningTests) {
-            require("library-app/app")["default"].create({"name":"library-app","version":"0.0.0+ec616a4b"});
+            require("library-app/app")["default"].create({"name":"library-app","version":"0.0.0+7087a31a"});
           }
         
 //# sourceMappingURL=library-app.map

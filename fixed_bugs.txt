@@ -1,14 +1,17 @@
 1 - Problem: Bootstrap could not find jquery
   - Solution: jquery installed as ember addon
   - Source: Myself
+  - Tempo: 2h.
 
-2 - Problem: N/A: version "N/A -> N/A" is not yet installed 
+2 - Problem: N/A: version "N/A -> N/A" is not yet installed
   - Solution: nvm alias default node
   - Source: https://www.robotexchange.io/t/trouble-installing-node-red-on-armbian-orange-pi-solved/733
-  
+  - Tempo: 5min.
+
 3 - Problem: ember install emberfire could not find node_modules/lib/index.js
   - Solution: created an empty index.js file in node_modules/lib
   - Source: Myself
+  - Tempo: 10min.
 
 4 - Problem - git submoduled my project itself.
 
@@ -17,18 +20,18 @@ hint: You've added another git repository inside your current repository.
 hint: Clones of the outer repository will not contain the contents of
 hint: the embedded repository and will not know how to obtain it.
 hint: If you meant to add a submodule, use:
-hint: 
+hint:
 hint:   git submodule add <url> library-app
-hint: 
+hint:
 hint: If you added this path by mistake, you can remove it from the
 hint: index with:
-hint: 
+hint:
 hint:   git rm --cached library-app
-hint: 
+hint:
 hint: See "git help submodule" for more information.
 
  - Solution: https://stackoverflow.com/questions/22682870/git-undo-pushed-commits
-  
+
   $ git reset --hard <commit id do último ao primeiro 1 por 1>
   $ git fetch --all
   $ git push -u origin +master
@@ -43,4 +46,9 @@ hint: See "git help submodule" for more information.
   $ git commit -m "library-app fixing the submodule problems"
   $ git push origin master (Should be $ git push -u origin master bit it worked without the -u anyway)
 
-  
+  Tempo: 2 dias
+
+5 - Problem: Contact Page is not rendering and if reloaded starts a infinity loop bug 
+  - Solution:
+  - Source:
+  - Tempo:
